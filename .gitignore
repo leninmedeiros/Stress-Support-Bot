@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 
 # Telegram Bot Token
-.ini
+.config
 
 # Mac OS X
 .DS_Store
