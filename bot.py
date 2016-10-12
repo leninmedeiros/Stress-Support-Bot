@@ -8,14 +8,16 @@ CONFIG_FILE = '.config'
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
 ONLY_TEXT_WARNING = 'Sorry! I can only talk via text... ;('
 
-SOMETHING_WENT_WRONG_MESSAGE = "Oops! For some reason that I don't know yet I "
-SOMETHING_WENT_WRONG_MESSAGE += "couldn't understand you this time. ;( "
-SOMETHING_WENT_WRONG_MESSAGE += "I'm so sorry! I'm working on it in order to "
-SOMETHING_WENT_WRONG_MESSAGE += "find out what went wrong. "
-SOMETHING_WENT_WRONG_MESSAGE += "Please try again the same message later, OK? "
-SOMETHING_WENT_WRONG_MESSAGE += "Now you can try saying it differently if you "
-SOMETHING_WENT_WRONG_MESSAGE += "want..."
-SOMETHING_WENT_WRONG_MESSAGE += "I would be very happy in helping you! :D"
+SOMETHING_WENT_WRONG_MESSAGE = (
+    "Oops! For some reason that I don't know yet I "
+    "couldn't understand you this time. ;( "
+    "I'm so sorry! I'm working on it in order to "
+    "find out what went wrong. "
+    "Please try again the same message later, OK? "
+    "Now you can try saying it differently if you "
+    "want..."
+    "I would be very happy in helping you! :D"
+)
 
 logging.basicConfig(level=logging.INFO)
 logFormatter = logging.Formatter(
@@ -48,7 +50,8 @@ def handle(msg):
             bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
         else:
             bot.sendMessage(chat_id,
-                            reasoning.process_incoming_message(msg['text']))
+                            reasoning.process_incoming_message(
+                                msg['text'], msg['chat']['first_name']))
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']
         logging.exception(str(e)+"\n%s" % log_msg)
