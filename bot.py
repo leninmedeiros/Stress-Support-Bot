@@ -3,6 +3,9 @@ import configparser
 import time
 import logging
 import reasoning
+import uuid
+from pymongo import MongoClient
+
 
 CONFIG_FILE = '.config'
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
@@ -38,6 +41,13 @@ config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
 
 token = config.get('TelegramToken', 'token')
+db_name = config.get('DB_Name', 'db')
+
+clientDB = MongoClient()
+
+
+def get_db_name():
+    return db_name
 
 bot = telepot.Bot(token)
 
@@ -49,9 +59,25 @@ def handle(msg):
         if content_type != DEFAULT_CHAT_MESSAGE_TYPE:
             bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
         else:
-            bot.sendMessage(chat_id,
-                            reasoning.process_incoming_message(
-                                msg['text'], msg['chat']['first_name']))
+            id = uuid.uuid4()
+            msg_id = "*THANK YOU FOR PARTICIPATING! YOUR ID IS: "+str(id)+"*"
+
+            processed_response = reasoning.process_incoming_message(
+                msg['text'], msg['chat']['first_name'])
+
+            bot.sendMessage(chat_id, processed_response['response'])
+            bot.sendMessage(chat_id, msg_id, "Markdown")
+
+            db = clientDB[db_name]
+            participants_data = db.participants_data
+
+            participant_data = {"_id": str(id),
+                                "message": msg['text'],
+                                "situation": processed_response['situation'],
+                                "strategy": processed_response['strategy'],
+                                "response": processed_response['response']}
+
+            participants_data.insert_one(participant_data)
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']
         logging.exception(str(e)+"\n%s" % log_msg)

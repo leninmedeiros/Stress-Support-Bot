@@ -52,7 +52,7 @@ def process_incoming_message(message, user):
         print("The selected strategy is: "+strategy)
     else:
         response = THERE_IS_NO_STRESSFUL_SITUATION_RESPONSE
-    return response
+    return {'situation': situation, 'strategy': strategy, 'response': response}
 
 
 def select_strategy(situation):
