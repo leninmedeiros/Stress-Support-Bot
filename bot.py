@@ -5,6 +5,9 @@ import logging
 import reasoning
 import uuid
 from pymongo import MongoClient
+# from pymongo import Connection
+import sys
+import pymongo
 
 
 CONFIG_FILE = '.config'
@@ -42,12 +45,17 @@ config.read(CONFIG_FILE)
 
 token = config.get('TelegramToken', 'token')
 db_name = config.get('DB_Name', 'db')
+server = config.get('DB_Server', 'server')
+port = config.get('DB_Port', 'port')
+username = config.get('DB_Username', 'username')
+password = config.get('DB_Password', 'password')
 
-clientDB = MongoClient()
+db = MongoClient(host=server, port=int(port))
+db[db_name].authenticate(username, password)
 
 
-def get_db_name():
-    return db_name
+# def get_db_name():
+#    return db_name
 
 bot = telepot.Bot(token)
 
@@ -68,8 +76,8 @@ def handle(msg):
             bot.sendMessage(chat_id, processed_response['response'])
             bot.sendMessage(chat_id, msg_id, "Markdown")
 
-            db = clientDB[db_name]
-            participants_data = db.participants_data
+            # db = clientDB[db_name]
+            participants_data = db[db_name].participants_data
 
             participant_data = {"_id": str(id),
                                 "message": msg['text'],
@@ -78,6 +86,7 @@ def handle(msg):
                                 "response": processed_response['response']}
 
             participants_data.insert_one(participant_data)
+
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']
         logging.exception(str(e)+"\n%s" % log_msg)

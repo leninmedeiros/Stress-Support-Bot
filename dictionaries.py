@@ -45,12 +45,12 @@ HEALTH = ["disease", "illness", "ill", "surgery", "tumor",
            "doctors", "healthy", "unhealthy", "sick", "nauseated", "bacteria",
            "allergy", "cough", "cold", "blood", "urine", "smoking", "smoke"]
 
-EXAMS = ["exams", "exam", "school", "college", "course",
+EDUCATIONAL = ["exams", "exam", "school", "college", "course",
          "university", "test", "grade", "teacher", "examination", "question sheet",
          "phd", "my master", "thesis", "dissertation", "paper", "article", "journal",
          "conference", "experiment", "data analysis"]
 
-DICTIONARIES = [RELATIONSHIP, WORK, DEATH, FINANCIAL, HEALTH, EXAMS]
+DICTIONARIES = [RELATIONSHIP, WORK, DEATH, FINANCIAL, HEALTH, EDUCATIONAL]
 
 
 def get_dictionaries():
