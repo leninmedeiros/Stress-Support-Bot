@@ -39,16 +39,18 @@ FINANCIAL = ["financial", "salary", "paycheck", "money", "debt", "debts",
              "wealth", "bundle", "pile", "sterling", "currency", "atm", "account",
              "insurance", "price", "rent"]
 
-DISEASE = ["disease", "illness", "ill", "surgery", "tumor",
+HEALTH = ["disease", "illness", "ill", "surgery", "tumor",
            "cancer", "hospital", "doctor", "aids", "hiv", "virus",
-           "treatment"]
+           "treatment", "pain", "headache", "injury", "injuried", "health",
+           "doctors", "healthy", "unhealthy", "sick", "nauseated", "bacteria",
+           "allergy", "cough", "cold", "blood", "urine", "smoking", "smoke"]
 
 EXAMS = ["exams", "exam", "school", "college", "course",
          "university", "test", "grade", "teacher", "examination", "question sheet",
          "phd", "my master", "thesis", "dissertation", "paper", "article", "journal",
          "conference", "experiment", "data analysis"]
 
-DICTIONARIES = [RELATIONSHIP, WORK, DEATH, FINANCIAL, DISEASE, EXAMS]
+DICTIONARIES = [RELATIONSHIP, WORK, DEATH, FINANCIAL, HEALTH, EXAMS]
 
 
 def get_dictionaries():

@@ -92,11 +92,9 @@ def set_template_for_situation(situation, response):
     a = numpy.arange(len(templates))
     index = numpy.random.choice(a, 1)
     raw_response = templates[index]
-    if situation == "other":
-        print("situation is other")
+    if situation == "other" or situation == "death":
         response = raw_response.replace("<situation>", "")
     else:
-        print("well defined situation")
         response = raw_response.replace("<situation>", situation + " ")
 
     return response
