@@ -1,5 +1,7 @@
-RELATIONSHIP = ["relationship", "girlfriend", "boyfriend", "wife",
-                "husband", "marriage", "divorce", "divorced", "broke up",
+RELATIONSHIP = ["relationship", "relationships", "girlfriends", "boyfriends",
+                "wifes", "girlfriend", "boyfriend", "wife",
+                "husband", "husbands", "marriage", "divorce", "divorced",
+                "broke up", "crushes", "romances", "affairs",
                 "my ex", "brokes up", "break up", "crush",
                 "fiancé", "broke my heart", "romance", "state",
                 "anaclisis", "love affair", "affair", "sexual relationship",
@@ -15,8 +17,9 @@ RELATIONSHIP = ["relationship", "girlfriend", "boyfriend", "wife",
                 "nuptials", "honeymoon", "cheated on", "cheat on",
                 "someone else", "passion"]
 
-WORK = ["work", "working", "boss", "work load", "job", "task",
-        "project", "company", "production", "nightwork", "jobs", "duty",
+WORK = ["work", "worked", "works", "working", "boss", "bosses", "work load",
+        "job", "jobs", "task", "tasks", "projects", "companies", "managers"
+        "project", "company", "production", "nightwork", "duty",
         "duties", "mission", "wash", "substituting", "ironing", "operation",
         "labour", "shining", "tending", "social service", "heavy lifting",
         "loose end", "labor", "polishing", "housework", "investigation",
@@ -29,10 +32,11 @@ WORK = ["work", "working", "boss", "work load", "job", "task",
         "assistant foreman", "chief", "honcho", "ganger", "straw boss", "leader",
         "executive", "administrator", "general manager", "manager", "colleague",
         "employee", "fired", "hired", "hiring", "firing", "deadline",
-        "business", "service"]
+        "deadlines", "business", "service", "colleagues", "employed", "full time",
+        "home office", "firm", "firms"]
 
-DEATH = ["death", "died", "dead", "passed away", "pass away", "loss",
-         "passed out", "decease",
+LOSS = ["death", "died", "dead", "passed away", "pass away", "loss",
+         "passed out", "decease", "deaths", "deceases", "losses"
          "expiry", "passing away", "passing out", "dying", "bury",
          "buried", "funeral", "killed",
          "deceased", "no more", "rest in piece"]
@@ -51,14 +55,15 @@ HEALTH = ["disease", "illness", "ill", "surgery", "tumor", "diagnose",
            "doctors", "healthy", "unhealthy", "sick", "sickness", "nauseated",
            "allergy", "cough", "cold", "blood", "urine", "smoking", "smoke",
            "suffer", "suffering", "diagnosis", "infected", "health", "bacteria",
-           "condition",]
+           "condition", "diseases", "bacterias", "doctors", "clinical"]
 
 EDUCATIONAL = ["exams", "exam", "school", "college", "course", "learn"
          "university", "test", "grade", "teacher", "examination", "question sheet",
          "phd", "my master", "thesis", "dissertation", "paper", "article", "journal",
-         "conference", "experiment", "data analysis", "education"]
+         "conference", "experiment", "data analysis", "education", "schools",
+         "articles", "journals", "master degree", "bachelor"]
 
-DICTIONARIES = [RELATIONSHIP, WORK, DEATH, FINANCIAL, HEALTH, EDUCATIONAL]
+DICTIONARIES = [RELATIONSHIP, WORK, LOSS, FINANCIAL, HEALTH, EDUCATIONAL]
 
 
 def get_dictionaries():

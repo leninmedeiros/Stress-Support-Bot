@@ -5,10 +5,7 @@ import logging
 import reasoning
 import uuid
 from pymongo import MongoClient
-# from pymongo import Connection
-import sys
-import pymongo
-
+import time
 
 CONFIG_FILE = '.config'
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
@@ -23,6 +20,11 @@ SOMETHING_WENT_WRONG_MESSAGE = (
     "Now you can try saying it differently if you "
     "want..."
     "I would be very happy in helping you! :D"
+)
+
+HINT_MESSAGE = (
+    "Just type a message describing a given stressful situation."
+    " And please make sure you are not using any especial character like '/'."
 )
 
 logging.basicConfig(level=logging.INFO)
@@ -54,9 +56,6 @@ db = MongoClient(host=server, port=int(port))
 db[db_name].authenticate(username, password)
 
 
-# def get_db_name():
-#    return db_name
-
 bot = telepot.Bot(token)
 
 
@@ -67,25 +66,43 @@ def handle(msg):
         if content_type != DEFAULT_CHAT_MESSAGE_TYPE:
             bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
         else:
-            id = uuid.uuid4()
-            msg_id = "*THANK YOU FOR PARTICIPATING! YOUR ID IS: "+str(id)+"*"
+            if msg['text'][0] == "/":
+                bot.sendMessage(chat_id, HINT_MESSAGE)
+            else:
+                username = msg['from']['username']
+                users = db[db_name].users
+                user = db[db_name].users.find_one({"username": username})
+                user_id = ""
 
-            processed_response = reasoning.process_incoming_message(
-                msg['text'], msg['chat']['first_name'])
+                if user is None:
+                    user_id = str(uuid.uuid4())
+                    user = {"_id": user_id,
+                            "username": username,
+                            "usefull": "",
+                            "group": "",
+                            "time_created": time.asctime(
+                                time.localtime(time.time()))}
+                    users.insert_one(user)
+                else:
+                    user_id = user['_id']
 
-            bot.sendMessage(chat_id, processed_response['response'])
-            bot.sendMessage(chat_id, msg_id, "Markdown")
+                processed_response = reasoning.process_incoming_message(
+                    msg['text'], msg['chat']['first_name'])
 
-            # db = clientDB[db_name]
-            participants_data = db[db_name].participants_data
+                bot.sendMessage(chat_id, processed_response['response'])
 
-            participant_data = {"_id": str(id),
-                                "message": msg['text'],
-                                "situation": processed_response['situation'],
-                                "strategy": processed_response['strategy'],
-                                "response": processed_response['response']}
+                messages = db[db_name].messages
 
-            participants_data.insert_one(participant_data)
+                message = {"_id": str(uuid.uuid4()),
+                           "user": user_id,
+                           "message": msg['text'],
+                           "situation": processed_response['situation'],
+                           "strategy": processed_response['strategy'],
+                           "response": processed_response['response'],
+                           "time_created": time.asctime(
+                               time.localtime(time.time()))}
+
+                messages.insert_one(message)
 
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']

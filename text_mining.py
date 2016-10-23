@@ -1,7 +1,7 @@
 
 from dictionaries import get_dictionaries
 
-stressful_situations = ["relationship", "work", "death", "financial",
+stressful_situations = ["relationship", "work", "loss", "financial",
                         "health", "educational", "other"]
 individuals = ["self", "family", "other"]
 
