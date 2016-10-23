@@ -85,7 +85,7 @@ def select_template(strategy):
 
 def set_template_for_situation(situation, response):
     # Bots 1 & 3: telling the name of the situation
-    # Bots 2 & $ $: without telling the name of the situation
+    # Bots 2 & 4: without telling the name of the situation
 
     # This if-else is useless for Bots 2 & 4. Use the below instead:
     # templates = response[0]
