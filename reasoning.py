@@ -56,10 +56,9 @@ def process_incoming_message(message, user):
 
 
 def select_strategy(situation):
+    # Bots 1 & 2: with probabilities.
     index_s = text_mining.stressful_situations.index(situation)
     prob = PROBABILITIES[index_s]
-
-    # Bots 1 & 2: with probabilities.
     sel_index = numpy.random.choice(5, 1, p=prob)
     # Bots 3 & 4: without probabilities (completely random choice).
     # sel_index = numpy.random.choice(5, 1)
