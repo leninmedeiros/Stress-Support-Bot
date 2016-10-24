@@ -27,6 +27,12 @@ HINT_MESSAGE = (
     " And please make sure you are not using any especial character like '/'."
 )
 
+NO_USERNAME_MSG = (
+    "Oops! I see that you don't have an username, but in order to participate"
+    " you really need to have one. Please, go to settings and choose one for"
+    " you."
+)
+
 logging.basicConfig(level=logging.INFO)
 logFormatter = logging.Formatter(
     "%(asctime)s [%(threadName)-12.12s]" +
@@ -62,47 +68,49 @@ bot = telepot.Bot(token)
 def handle(msg):
     try:
         content_type, chat_type, chat_id = telepot.glance(msg)
-
-        if content_type != DEFAULT_CHAT_MESSAGE_TYPE:
-            bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
+        if 'username' not in msg['from'].keys():
+            bot.sendMessage(chat_id, NO_USERNAME_MSG)
         else:
-            if msg['text'][0] == "/":
-                bot.sendMessage(chat_id, HINT_MESSAGE)
+            if content_type != DEFAULT_CHAT_MESSAGE_TYPE:
+                bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
             else:
-                username = msg['from']['username']
-                users = db[db_name].users
-                user = db[db_name].users.find_one({"username": username})
-                user_id = ""
-
-                if user is None:
-                    user_id = str(uuid.uuid4())
-                    user = {"_id": user_id,
-                            "username": username,
-                            "usefull": "",
-                            "group": "",
-                            "time_created": time.asctime(
-                                time.localtime(time.time()))}
-                    users.insert_one(user)
+                if msg['text'][0] == "/":
+                    bot.sendMessage(chat_id, HINT_MESSAGE)
                 else:
-                    user_id = user['_id']
+                    username = msg['from']['username']
+                    users = db[db_name].users
+                    user = db[db_name].users.find_one({"username": username})
+                    user_id = ""
 
-                processed_response = reasoning.process_incoming_message(
-                    msg['text'], msg['chat']['first_name'])
+                    if user is None:
+                        user_id = str(uuid.uuid4())
+                        user = {"_id": user_id,
+                                "username": username,
+                                "usefull": "",
+                                "group": "",
+                                "time_created": time.asctime(
+                                    time.localtime(time.time()))}
+                        users.insert_one(user)
+                    else:
+                        user_id = user['_id']
 
-                bot.sendMessage(chat_id, processed_response['response'])
+                    processed_response = reasoning.process_incoming_message(
+                        msg['text'], msg['chat']['first_name'])
 
-                messages = db[db_name].messages
+                    bot.sendMessage(chat_id, processed_response['response'])
 
-                message = {"_id": str(uuid.uuid4()),
-                           "user": user_id,
-                           "message": msg['text'],
-                           "situation": processed_response['situation'],
-                           "strategy": processed_response['strategy'],
-                           "response": processed_response['response'],
-                           "time_created": time.asctime(
-                               time.localtime(time.time()))}
+                    messages = db[db_name].messages
 
-                messages.insert_one(message)
+                    message = {"_id": str(uuid.uuid4()),
+                               "user": user_id,
+                               "message": msg['text'],
+                               "situation": processed_response['situation'],
+                               "strategy": processed_response['strategy'],
+                               "response": processed_response['response'],
+                               "time_created": time.asctime(
+                                   time.localtime(time.time()))}
+
+                    messages.insert_one(message)
 
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']
