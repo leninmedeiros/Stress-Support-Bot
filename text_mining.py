@@ -20,7 +20,11 @@ def classify_the_stressful_situation(message):
         factors.append(get_term_appearance_factor(
              message, val
         ))
-    situation = stressful_situations[factors.index(max(factors))]
+    max_factor = max(factors)
+    if max_factor > 0:
+        situation = stressful_situations[factors.index(max(factors))]
+    else:
+        situation = stressful_situations[len(stressful_situations) - 1]
     return situation
 
 
