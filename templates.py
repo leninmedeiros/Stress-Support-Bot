@@ -103,7 +103,7 @@ cc_msg4 = (
 )
 
 cc_msg5 = (
-    "Oh, <user>, don't worry too much… at least you are learning important"
+    "Oh, <user>, don't worry too much, at least you are learning important"
     " lessons from this <situation>situation, right? Therefore, see this as a"
     " learning process and you'll feel better. Besides that, you now"
     " know how to proceed in order to avoid this in the future."

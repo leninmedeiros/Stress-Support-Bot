@@ -15,7 +15,7 @@ RELATIONSHIP = ["relationship", "relationships", "girlfriends", "boyfriends",
                 "signora", "battle-axe", "crown princess", "sheika", "love",
                 "lover", "beau", "swain", "spousal", "wedlock", "matrimony",
                 "nuptials", "honeymoon", "cheated on", "cheat on",
-                "someone else", "passion"]
+                "someone else", "passion", "bad sex"]
 
 WORK = ["work", "worked", "works", "working", "boss", "bosses", "work load",
         "job", "jobs", "task", "tasks", "projects", "companies", "managers"
@@ -47,7 +47,7 @@ FINANCIAL = ["financial", "salary", "paycheck", "money", "debt", "debts",
              "investments", "bill", "bills", "euro", "euros", "$", "€", "£",
              "wealth", "bundle", "pile", "sterling", "currency", "atm", "account",
              "insurance", "price", "rent", "cent", "penny", "pound", "broke",
-             "lend", "borrow", "loan"]
+             "lend", "borrow", "loan", "expenses", "expense"]
 
 HEALTH = ["disease", "illness", "ill", "surgery", "tumor", "diagnose",
            "cancer", "hospital", "doctor", "aids", "hiv", "virus", "infection",
@@ -55,7 +55,9 @@ HEALTH = ["disease", "illness", "ill", "surgery", "tumor", "diagnose",
            "doctors", "healthy", "unhealthy", "sick", "sickness", "nauseated",
            "allergy", "cough", "cold", "blood", "urine", "smoking", "smoke",
            "suffer", "suffering", "diagnosis", "infected", "health", "bacteria",
-           "condition", "diseases", "bacterias", "doctors", "clinical"]
+           "condition", "diseases", "bacterias", "doctors", "clinical", "overweight",
+           "unprotected sex", "drugs", "tobacco", "alcohol", "diet", "std",
+           "sexually transmitted disease", "sexually transmitted diseases"]
 
 EDUCATIONAL = ["exams", "exam", "school", "college", "course", "learn"
          "university", "test", "grade", "teacher", "examination", "question sheet",
