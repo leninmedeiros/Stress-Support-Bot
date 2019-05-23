@@ -48,8 +48,6 @@ def process_incoming_message(message, user):
         # To use like the below afterwards:
         # response = construct_response(situation, user, individual, strategy)
         response = construct_response(situation, user, strategy)
-        print("The identified situation concerns to: "+situation)
-        print("The selected strategy is: "+strategy)
     else:
         response = THERE_IS_NO_STRESSFUL_SITUATION_RESPONSE
     return {'situation': situation, 'strategy': strategy, 'response': response}

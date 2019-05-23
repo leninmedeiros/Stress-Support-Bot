@@ -11,7 +11,6 @@ from dotenv import load_dotenv
 if os.getenv("MODE") != "production":
     load_dotenv()
 
-CONFIG_FILE = '.config'
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
 ONLY_TEXT_WARNING = 'Sorry! I can only talk via text... ;('
 
@@ -51,9 +50,6 @@ rootLogger.addHandler(fileHandler)
 consoleHandler = logging.StreamHandler()
 consoleHandler.setFormatter(logFormatter)
 rootLogger.addHandler(consoleHandler)
-
-config = configparser.ConfigParser()
-config.read(CONFIG_FILE)
 
 token = os.getenv("TELEGRAM_TOKEN")
 db_name = os.getenv("DB_NAME")
