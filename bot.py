@@ -5,7 +5,11 @@ import logging
 import reasoning
 import uuid
 from pymongo import MongoClient
-import time
+import os
+from dotenv import load_dotenv
+
+if os.getenv("MODE") != "production":
+    load_dotenv()
 
 CONFIG_FILE = '.config'
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
@@ -51,17 +55,15 @@ rootLogger.addHandler(consoleHandler)
 config = configparser.ConfigParser()
 config.read(CONFIG_FILE)
 
-token = config.get('TelegramToken', 'token')
-db_name = config.get('DB_Name', 'db')
-server = config.get('DB_Server', 'server')
-port = config.get('DB_Port', 'port')
-username = config.get('DB_Username', 'username')
-password = config.get('DB_Password', 'password')
+token = os.getenv("TELEGRAM_TOKEN")
+db_name = os.getenv("DB_NAME")
+server = os.getenv("DB_SERVER")
+port = os.getenv("DB_PORT")
+username = os.getenv("DB_USERNAME")
+password = os.getenv("DB_PASSWORD")
 
 db = MongoClient(host=server, port=int(port))
 db[db_name].authenticate(username, password)
-
-
 bot = telepot.Bot(token)
 
 
@@ -116,6 +118,7 @@ def handle(msg):
         log_msg = 'The message sent by the user was "%s"' % msg['text']
         logging.exception(str(e)+"\n%s" % log_msg)
         bot.sendMessage(chat_id, SOMETHING_WENT_WRONG_MESSAGE)
+
 
 bot.message_loop(handle)
 
