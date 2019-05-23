@@ -59,7 +59,7 @@ def select_strategy(situation):
     # Bots 1 & 2: with probabilities.
     index_s = text_mining.stressful_situations.index(situation)
     prob = PROBABILITIES[index_s]
-    sel_index = numpy.random.choice(5, 1, p=prob)
+    sel_index = numpy.random.choice(5, 1, p=prob).item(0)
     # Bots 3 & 4: without probabilities (completely random choice).
     # sel_index = numpy.random.choice(5, 1)
 
@@ -94,7 +94,7 @@ def set_template_for_situation(situation, response):
         templates = response[0]
 
     a = numpy.arange(len(templates))
-    index = numpy.random.choice(a, 1)
+    index = numpy.random.choice(a, 1).item(0)
     raw_response = templates[index]
     # This if-else is useless for Bots 2 & 4. Use the below instead:
     # response = raw_response.replace("<situation>", "")
