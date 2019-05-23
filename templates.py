@@ -159,7 +159,8 @@ ad_msg2 = (
 
 ad_msg3 = (
     "<user>, don't think about this <situation>situation. Let your mind be"
-    " focused on other things that can make you happy. You'll be fine this way!"
+    " focused on other things that can make you happy. You'll be fine this"
+    " way!"
 )
 
 ad_msg4 = (
@@ -196,8 +197,8 @@ AD_DEATH = [ad_death1]
 # situation selection messages
 ss_msg1 = (
     "<user>, I think you can avoid being confronted with this"
-    " <situation>situation too much. For sure you have other important tasks or"
-    " things to deal with, right? So stay focused on them, do what you have"
+    " <situation>situation too much. For sure you have other important tasks"
+    " or things to deal with, right? So stay focused on them, do what you have"
     " to do and let it go. This way I thinkyou're gonna feel better."
 )
 
@@ -220,15 +221,16 @@ ss_msg4 = (
     "<user>, for some cases like this <situation>situation you told me,"
     " it's better to avoid facing it. For sure you have other things or tasks"
     " to deal with, right? So try to occupy your head with them and let"
-    " it go... maybe the best thing to do now is to make sure you will not face"
-    " the situation anymore"
+    " it go... maybe the best thing to do now is to make sure you will not"
+    " face the situation anymore"
 )
 
 ss_msg5 = (
     "Oh, <user>, this <situation>situation seems to be complicated to deal"
-    " with, indeed. But maybe it's better to avoid being confronted with it too"
-    " often. Sometimes you just can't do anything about a given issue. Is it"
-    " the case now? It might be helpful to act like this… think about it."
+    " with, indeed. But maybe it's better to avoid being confronted with"
+    " it too often. Sometimes you just can't do anything about a given issue."
+    " Is it the case now? It might be helpful to act like this… think"
+    " about it."
 )
 
 ss_msg6 = (
@@ -259,7 +261,8 @@ sm_msg1 = (
 )
 
 sm_msg2 = (
-    "Oh, <user>, I see that what you told me isn't a good <situation>situation,"
+    "Oh, <user>, I see that what you told me isn't a good"
+    " <situation>situation,"
     " for sure, but maybe you can realize that there are things you can do in"
     " order to change it. Take your time, calm down and try to come up with a"
     " list of things you could do to improve this situation in order to feel"
@@ -307,9 +310,9 @@ sm_death1 = (
     " probably the only thing in life we can't do anything about. I would say"
     " that for now you need to make an effort in order to feel better So"
     " live your life using all the good things you learned from the important"
-    " people that already have passed away. Let it go and one day you'll accept"
-    " it. Maybe you need a few days off and then you should focus on the things"
-    " you have to do."
+    " people that already have passed away. Let it go and one day you'll"
+    " accept it. Maybe you need a few days off and then you should focus"
+    " on the things you have to do."
 )
 
 sm_death2 = (
