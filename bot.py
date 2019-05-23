@@ -1,5 +1,4 @@
 import telepot
-import configparser
 import time
 import logging
 import reasoning
@@ -40,6 +39,9 @@ NO_USERNAME_MSG = (
     " you."
 )
 
+QUALTRICS_CODE_MESSAGE = (
+    "Here comes your QUALTRICS CODE: 08121992-@#&&"
+)
 logging.basicConfig(level=logging.INFO)
 logFormatter = logging.Formatter(
     "%(asctime)s [%(threadName)-12.12s]" +
@@ -115,6 +117,10 @@ def handle(msg):
                                    time.localtime(time.time()))}
 
                     messages.insert_one(message)
+
+                    prev_msg = db[db_name].messages.find({"user": user_id})
+                    if prev_msg.count() >= 2:
+                        bot.sendMessage(chat_id, QUALTRICS_CODE_MESSAGE)
 
     except Exception as e:
         log_msg = 'The message sent by the user was "%s"' % msg['text']
