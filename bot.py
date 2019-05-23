@@ -13,6 +13,10 @@ if os.getenv("MODE") != "production":
 
 DEFAULT_CHAT_MESSAGE_TYPE = 'text'
 ONLY_TEXT_WARNING = 'Sorry! I can only talk via text... ;('
+MINIMUM_LENGTH_MESSAGE = (
+    'Please, make sure your message contains at least 50 characters.'
+)
+MINIMUM_LENGTH_ALLOWED = 50
 
 SOMETHING_WENT_WRONG_MESSAGE = (
     "Oops! For some reason that I don't know yet I "
@@ -71,6 +75,8 @@ def handle(msg):
         else:
             if content_type != DEFAULT_CHAT_MESSAGE_TYPE:
                 bot.sendMessage(chat_id, ONLY_TEXT_WARNING)
+            elif len(msg['text']) < MINIMUM_LENGTH_ALLOWED:
+                bot.sendMessage(chat_id, MINIMUM_LENGTH_MESSAGE)
             else:
                 if msg['text'][0] == "/":
                     bot.sendMessage(chat_id, HINT_MESSAGE)
